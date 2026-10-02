@@ -1,26 +1,825 @@
 @import "tailwindcss";
 
-:root {
+/* `dark:` follows the resolved theme on <html>, not only the OS setting. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---------- Color tokens: one monochrome ramp, re-mapped per theme ---------- */
+
+:root,
+[data-theme="light"] {
+  color-scheme: light;
   --background: #ffffff;
-  --foreground: #171717;
+  --ink: #0a0a0a;
+  --gray-50: #fafafa;
+  --gray-100: #f5f5f5;
+  --gray-200: #e9e9e9;
+  --gray-300: #d4d4d4;
+  --gray-400: #a3a3a3;
+  --gray-500: #737373;
+  --gray-600: #525252;
+  --gray-700: #404040;
+  --gray-800: #262626;
+  --gray-900: #171717;
+  --gray-950: #0f0f0f;
+
+  /* Raised surfaces (project cards) and the media panel set into them. */
+  --surface: #ffffff;
+  --surface-muted: #f5f5f5;
+  --edge-strong: #a3a3a3;
+
+  --card-shadow: 0 8px 22px -14px rgb(0 0 0 / 0.25);
+  --card-shadow-hover: 0 18px 36px -20px rgb(0 0 0 / 0.4);
+
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --background: #000000;
+  --ink: #f4f4f5;
+  --gray-50: #18181b;
+  --gray-100: #1e1e22;
+  --gray-200: #2a2a30;
+  --gray-300: #3a3a42;
+  --gray-400: #8a8a92;
+  --gray-500: #a0a0a8;
+  --gray-600: #b4b4bb;
+  --gray-700: #c8c8ce;
+  --gray-800: #dcdce0;
+  --gray-900: #e8e8eb;
+  --gray-950: #efeff1;
+
+  /* Lifted off the black page, so cards read as surfaces rather than holes; the hover
+     edge firms up without turning into a bright outline. */
+  --surface: #17181c;
+  --surface-muted: #1d1e23;
+  --edge-strong: #47484f;
+
+  /* Shadows nearly disappear in dark mode; borders carry the structure. */
+  --card-shadow: 0 8px 22px -14px rgb(0 0 0 / 0.5);
+  --card-shadow-hover: 0 18px 36px -20px rgb(0 0 0 / 0.7);
+
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-ink: var(--ink);
+  --color-surface: var(--surface);
+  --color-surface-muted: var(--surface-muted);
+  --color-edge-strong: var(--edge-strong);
+  --color-gray-50: var(--gray-50);
+  --color-gray-100: var(--gray-100);
+  --color-gray-200: var(--gray-200);
+  --color-gray-300: var(--gray-300);
+  --color-gray-400: var(--gray-400);
+  --color-gray-500: var(--gray-500);
+  --color-gray-600: var(--gray-600);
+  --color-gray-700: var(--gray-700);
+  --color-gray-800: var(--gray-800);
+  --color-gray-900: var(--gray-900);
+  --color-gray-950: var(--gray-950);
+
+  --font-sans: var(--font-geist-sans), system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+  --font-pixel: var(--font-geist-pixel), var(--font-geist-mono), monospace;
+  --font-serif: var(--font-source-serif), Georgia, serif;
+
+  --shadow-card: var(--card-shadow);
+  --shadow-card-hover: var(--card-shadow-hover);
+
+  --ease-soft: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* ---------- Base ---------- */
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  /* .theme-sheet is a copy of <body> in the old theme (see the sheet section below). */
+  body,
+  .theme-sheet {
+    background-color: var(--background);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 15px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    background-color: var(--ink);
+    color: var(--background);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--ink);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--gray-300) transparent;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--gray-300);
+    border-radius: 9999px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+/* ---------- Signature pieces ---------- */
+
+@layer components {
+  /* Tiny uppercase mono label — the system's signature register. */
+  .micro-label {
+    font-family: var(--font-mono);
+    font-size: 10px;
+    line-height: 1.4;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* Form fields (the contact form): a 1px neutral edge; focus lifts the fill, firms the
+     edge and adds a soft 3px ring in place of the browser outline. Nothing changes size. */
+  .field {
+    --field-bg: #fbfbfb;
+    --field-bg-focus: #ffffff;
+    --field-border-hover: var(--gray-300);
+    --field-border-focus: var(--gray-500);
+    --field-ring: rgb(0 0 0 / 0.06);
+    --field-error: rgb(180 35 24 / 0.5);
+    --field-error-ring: rgb(180 35 24 / 0.1);
+    display: block;
+    width: 100%;
+    border: 1px solid var(--gray-200);
+    border-radius: 0.5rem;
+    background-color: var(--field-bg);
+    color: var(--ink);
+    transition:
+      border-color 200ms ease,
+      background-color 200ms ease,
+      box-shadow 200ms ease;
+  }
+
+  [data-theme="dark"] .field {
+    --field-bg: #0d0d0f;
+    --field-bg-focus: #121316;
+    --field-border-focus: var(--gray-400);
+    --field-ring: rgb(255 255 255 / 0.07);
+    --field-error: rgb(240 143 134 / 0.5);
+    --field-error-ring: rgb(240 143 134 / 0.12);
+  }
+
+  .field::placeholder {
+    color: var(--gray-400);
+  }
+
+  .field:hover {
+    border-color: var(--field-border-hover);
+  }
+
+  .field:focus,
+  .field:focus-visible {
+    outline: none;
+    border-color: var(--field-border-focus);
+    background-color: var(--field-bg-focus);
+    box-shadow: 0 0 0 3px var(--field-ring);
+  }
+
+  .field[aria-invalid="true"] {
+    border-color: var(--field-error);
+  }
+
+  .field[aria-invalid="true"]:focus {
+    box-shadow: 0 0 0 3px var(--field-error-ring);
+  }
+
+  .field:disabled {
+    opacity: 0.6;
+  }
+
+  /* Field messages: a deep, quiet red rather than an alarm. */
+  .field-error {
+    color: #b42318;
+  }
+
+  [data-theme="dark"] .field-error {
+    color: #f08f86;
+  }
+
+  /* Underline drawn at 25% of the text color, full strength on hover. */
+  .link-underline {
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
+    text-decoration-color: color-mix(in srgb, currentColor 25%, transparent);
+    transition: text-decoration-color 200ms ease;
+  }
+
+  .link-underline:hover {
+    text-decoration-color: currentColor;
+  }
+
+  /* Hairline frame drawn just inside a card's edge. */
+  .card-frame {
+    position: relative;
+  }
+
+  .card-frame::after {
+    content: "";
+    position: absolute;
+    inset: 5px;
+    border: 1px solid var(--gray-200);
+    border-radius: 11px;
+    pointer-events: none;
+    opacity: 0.6;
+  }
+
+  .card-lift {
+    transition:
+      transform 420ms var(--ease-soft),
+      box-shadow 350ms var(--ease-soft),
+      border-color 200ms ease;
+  }
+
+  .card-lift:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-hover);
+  }
+
+  /* Entrance: fade up from 12px, staggered by --i (capped at 330ms). */
+  .reveal {
+    animation: fade-up 700ms var(--ease-soft) both;
+    animation-delay: min(calc(50ms + var(--i, 0) * 70ms), 330ms);
+  }
+
+  /* Below-the-fold content settles in as it scrolls into view, where supported. */
+  @supports (animation-timeline: view()) {
+    .reveal-scroll {
+      animation: fade-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0 entry 240px;
+    }
+  }
+
+  .status-dot {
+    animation: pulse-dot 1.8s ease-in-out infinite;
+  }
+
+  /* Typewriter caret: a slow, soft blink while the line is at rest. */
+  .caret {
+    animation: caret-blink 1.1s ease-in-out infinite;
+  }
+}
+
+/* Screenshot viewer (components/ScreenshotGallery.tsx): fades in, rising 8px and scaling up
+   from 0.98; closing plays it in reverse (.closing is set until the dialog closes). */
+.viewer[open] {
+  animation: viewer-in 320ms var(--ease-soft);
+}
+
+.viewer[open]::backdrop {
+  animation: viewer-fade 220ms ease-out;
+}
+
+@keyframes viewer-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+.viewer.closing {
+  animation: viewer-out 220ms ease-in both;
+}
+
+.viewer.closing::backdrop {
+  animation: viewer-fade-out 220ms ease-in both;
+}
+
+@keyframes viewer-out {
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+@keyframes viewer-fade-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes viewer-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+/* Switching screens: the current one slides out as the next slides in from the side it
+   comes from (420ms, ease-out without overshoot). Under reduced motion the change is instant. */
+.shot-slide-in-next {
+  animation: shot-in-next 420ms cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+.shot-slide-out-next {
+  animation: shot-out-next 420ms cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+.shot-slide-in-prev {
+  animation: shot-in-prev 420ms cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+.shot-slide-out-prev {
+  animation: shot-out-prev 420ms cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+@keyframes shot-in-next {
+  from {
+    transform: translateX(100%);
+  }
+}
+@keyframes shot-out-next {
+  to {
+    transform: translateX(-100%);
+  }
+}
+@keyframes shot-in-prev {
+  from {
+    transform: translateX(-100%);
+  }
+}
+@keyframes shot-out-prev {
+  to {
+    transform: translateX(100%);
+  }
+}
+
+/* Project media without screenshots: a faint halftone field, densest at the centre and
+   fading out before the edges. */
+.media-dots {
+  background-image: radial-gradient(circle, var(--gray-300) 1px, transparent 1.3px);
+  background-size: 14px 14px;
+  background-position: center;
+  mask-image: radial-gradient(ellipse 65% 70% at center, #000 0%, transparent 100%);
+  opacity: 0.7;
+}
+
+/* Phone shell for tall screenshots: a thin brushed-titanium band, a slim black bezel and
+   the screen, all with concentric corners scaled from the screen width (--screen-w, set
+   inline). A presentation shell only: no notch, island or fake system bars. */
+.device-frame {
+  --screen-r: calc(var(--screen-w) * 0.125);
+  --band: 3px;
+  --bezel: 6px;
+  position: relative;
+  padding: var(--band);
+  border-radius: calc(var(--screen-r) + var(--bezel) + var(--band));
+  background: linear-gradient(
+    150deg,
+    #6b6d71 0%,
+    #34363a 22%,
+    #4c4e53 48%,
+    #26282b 74%,
+    #5a5c60 100%
+  );
+  box-shadow:
+    inset 0 0 0 1px rgb(255 255 255 / 0.1),
+    0 2px 6px rgb(0 0 0 / 0.35),
+    0 40px 90px -30px rgb(0 0 0 / 0.8);
+}
+
+.device-bezel {
+  padding: var(--bezel);
+  border-radius: calc(var(--screen-r) + var(--bezel));
+  background: #050505;
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.04);
+}
+
+.device-screen {
+  border-radius: var(--screen-r);
+}
+
+/* Side keys: short titanium ridges just outside the band. */
+.device-key {
+  position: absolute;
+  width: 3px;
+  background: linear-gradient(90deg, #2a2c2f, #5d5f63 50%, #2a2c2f);
+}
+.device-key-left {
+  left: 0;
+  transform: translateX(-100%);
+  border-radius: 2px 0 0 2px;
+}
+.device-key-right {
+  right: 0;
+  transform: translateX(100%);
+  border-radius: 0 2px 2px 0;
+}
+
+/* Laptop for wide (desktop) screenshots: a product-mockup shell, never brand hardware.
+   Display: a hairline metal edge around a thin black glass bezel (a touch deeper at the
+   top), the screen inset with a faint inner border. Base: a barely-there hinge, a shallow
+   deck with a trackpad hint, and the front edge with its thumb notch, over a soft contact
+   shadow. Graphite in dark mode, silver in light. On phones it reduces to display + chin.
+   Everything scales from the screen width (--screen-w, set inline). */
+.laptop {
+  --overhang: 1.1;
+  --flank: 0px;
+  --rim: max(1px, calc(var(--screen-w) * 0.0025));
+  --bezel: max(4px, calc(var(--screen-w) * 0.012));
+  --bezel-top: max(5px, calc(var(--screen-w) * 0.016));
+  --lid-r: max(8px, calc(var(--screen-w) * 0.02));
+  --hinge-h: max(2px, calc(var(--screen-w) * 0.004));
+  --deck-h: max(4px, calc(var(--screen-w) * 0.009));
+  --front-h: max(4px, calc(var(--screen-w) * 0.011));
+
+  /* Graphite: a step lighter than the backdrop, so it never reads as a black slab. */
+  --rim-top: #4c4f55;
+  --rim-bottom: #2a2c30;
+  --glass: #0c0d0f;
+  --hinge-top: #141517;
+  --hinge-bottom: #24262a;
+  --deck-top: #55585e;
+  --deck-bottom: #3e4146;
+  --pad: rgb(255 255 255 / 0.07);
+  --front-top: #303236;
+  --front-bottom: #1c1d20;
+  --notch: #232427;
+  --contact: rgb(0 0 0 / 0.5);
+  --ambient: rgb(0 0 0 / 0.45);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Silver, for the light theme. */
+:root:not([data-theme="dark"]) .laptop {
+  --rim-top: #eef0f2;
+  --rim-bottom: #b2b5bb;
+  --hinge-top: #73767c;
+  --hinge-bottom: #9fa2a8;
+  --deck-top: #e6e8eb;
+  --deck-bottom: #cfd2d6;
+  --pad: rgb(0 0 0 / 0.07);
+  --front-top: #bcbfc4;
+  --front-bottom: #94979d;
+  --notch: #a6a9ae;
+  --contact: rgb(0 0 0 / 0.42);
+  --ambient: rgb(0 0 0 / 0.35);
+}
+
+/* Room for the ←/→ beside it (2 × 40px + 2 × 24px gaps), inside the dialog's 2rem side
+   padding (the width formula already allows 1rem). */
+@media (min-width: 1024px) {
+  .laptop-flanked {
+    --flank: 11rem;
+  }
+}
+
+.laptop-lid {
+  position: relative;
+  z-index: 1;
+  padding: var(--rim);
+  border-radius: var(--lid-r) var(--lid-r) calc(var(--lid-r) * 0.25) calc(var(--lid-r) * 0.25);
+  background: linear-gradient(180deg, var(--rim-top), var(--rim-bottom));
+  box-shadow:
+    0 0 0 1px rgb(0 0 0 / 0.25),
+    0 24px 60px -36px var(--ambient);
+}
+
+.laptop-bezel {
+  padding: var(--bezel-top) var(--bezel) var(--bezel);
+  border-radius: calc(var(--lid-r) - var(--rim)) calc(var(--lid-r) - var(--rim))
+    calc(var(--lid-r) * 0.25 - var(--rim)) calc(var(--lid-r) * 0.25 - var(--rim));
+  background: var(--glass);
+  box-shadow: inset 0 0 0 1px rgb(255 255 255 / 0.05);
+}
+
+.laptop-screen {
+  border-radius: max(2px, calc(var(--lid-r) * 0.22));
+  box-shadow: 0 0 0 1px rgb(255 255 255 / 0.06);
+}
+
+.laptop-base {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: calc(var(--screen-w) * var(--overhang));
+}
+
+.laptop-hinge {
+  width: 84%;
+  height: var(--hinge-h);
+  border-radius: 0 0 3px 3px;
+  background: linear-gradient(180deg, var(--hinge-top), var(--hinge-bottom));
+}
+
+/* The deck, seen edge-on: its corners ease back, so it reads as a thin slab. */
+.laptop-deck {
+  position: relative;
+  width: 100%;
+  height: var(--deck-h);
+  border-radius: calc(var(--deck-h) * 8) calc(var(--deck-h) * 8) 0 0 / var(--deck-h)
+    var(--deck-h) 0 0;
+  background: linear-gradient(180deg, var(--deck-top), var(--deck-bottom));
+}
+
+.laptop-deck::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: 14%;
+  height: 55%;
+  transform: translateX(-50%);
+  border-radius: 2px 2px 0 0;
+  background: var(--pad);
+}
+
+.laptop-front {
+  position: relative;
+  width: 100%;
+  height: var(--front-h);
+  border-radius: 0 0 calc(var(--front-h) * 6) calc(var(--front-h) * 6) / 0 0 var(--front-h)
+    var(--front-h);
+  background: linear-gradient(180deg, var(--front-top), var(--front-bottom));
+}
+
+/* The thumb notch for opening the lid. */
+.laptop-front::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 11%;
+  height: 50%;
+  transform: translateX(-50%);
+  border-radius: 0 0 6px 6px / 0 0 4px 4px;
+  background: var(--notch);
+}
+
+/* Contact shadow: densest right under the base, fading out to the sides. */
+.laptop-base::after {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  top: 60%;
+  left: 0;
+  right: 0;
+  height: max(12px, calc(var(--screen-w) * 0.03));
+  background: radial-gradient(ellipse 50% 50% at 50% 30%, var(--contact), transparent 100%);
+}
+
+/* Phones: display + a thin chin, so the screen itself gets the width. */
+@media (max-width: 639px) {
+  .laptop {
+    --overhang: 1.03;
+    --front-h: 5px;
+  }
+  .laptop-hinge,
+  .laptop-deck {
+    display: none;
+  }
+  .laptop-front::before {
+    width: 16%;
+  }
+}
+
+/* AI portfolio assistant (components/chat): the panel rises 8px from 0.98 out of the
+   bottom-right corner and settles back on close; messages fade up 6px; the typing dots
+   pulse softly. Reduced motion flattens all of it (see the media query below). */
+.chat-panel-in {
+  transform-origin: bottom right;
+  animation: chat-in 240ms var(--ease-soft) both;
+}
+
+.chat-panel-out {
+  transform-origin: bottom right;
+  animation: chat-out 180ms ease-in both;
+}
+
+@keyframes chat-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+@keyframes chat-out {
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.98);
+  }
+}
+
+.chat-msg {
+  animation: chat-msg 260ms var(--ease-soft) both;
+}
+
+@keyframes chat-msg {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+}
+
+/* "New chat": the fresh welcome state fades in over the cleared conversation. */
+.chat-reset {
+  animation: chat-fade 180ms ease-out both;
+}
+
+@keyframes chat-fade {
+  from {
+    opacity: 0;
+  }
+}
+
+.chat-dot {
+  animation: chat-dot 1.1s ease-in-out infinite;
+}
+
+@keyframes chat-dot {
+  0%,
+  100% {
+    opacity: 0.35;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@keyframes caret-blink {
+  0%,
+  45% {
+    opacity: 1;
+  }
+  55%,
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ---------- Theme control: selected option, styled before hydration ---------- */
+
+:root[data-theme-preference="light"] [data-theme-option="light"],
+:root[data-theme-preference="dark"] [data-theme-option="dark"],
+:root[data-theme-preference="system"] [data-theme-option="system"] {
+  background-color: var(--ink);
+  color: var(--background);
+}
+
+/* ---------- Theme change: the new theme slides over the page like a sheet ----------
+   The live page already wears the new theme and stays interactive. .theme-sheet is an
+   inert copy of the page in the old theme, laid on top and clipped away along a
+   straight diagonal edge travelling from the top-right corner to
+   the bottom-left, so no frame ever shows a mid-way color. It never takes input
+   and is removed when the animation ends (hooks/useTheme.ts). */
+
+.theme-sheet {
+  --sheet-duration: 1100ms;
+  /* Starts gently at the corner, carries through the middle, lands softly — never snaps.
+     (The front-loaded --ease-soft made the sweep feel rushed.) */
+  --sheet-ease: cubic-bezier(0.5, 0, 0.15, 1);
+
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  overflow: hidden;
+  pointer-events: none;
+  animation: theme-sheet-diagonal var(--sheet-duration) var(--sheet-ease) forwards;
+}
+
+.theme-sheet * {
+  pointer-events: none !important;
+  transition: none !important;
+}
+
+/* Time-based entrances must not replay in the copy; scroll-driven ones follow its scroll. */
+.theme-sheet :not(.reveal-scroll) {
+  animation: none !important;
+}
+
+/* The old page settles into a faint shade as the sheet passes over it. */
+.theme-sheet::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: #000;
+  opacity: 0;
+  animation: theme-sheet-recede var(--sheet-duration) var(--ease-soft) forwards;
+}
+
+/* The uncovered old page: everything below and left of the sheet's edge. */
+@keyframes theme-sheet-diagonal {
+  from {
+    clip-path: polygon(-110% 0, 100% 0, 100% 0, 100% 210%, -110% 210%);
+  }
+  to {
+    clip-path: polygon(-110% 0, -110% 0, 100% 210%, 100% 210%, -110% 210%);
+  }
+}
+
+@keyframes theme-sheet-recede {
+  to {
+    opacity: 0.07;
+  }
+}
+
+/* Phones: the same sheet, simplified to a straight drop from the top bar. */
+@media (max-width: 767px) {
+  .theme-sheet {
+    --sheet-duration: 950ms;
+    animation-name: theme-sheet-drop;
+  }
+
+  .theme-sheet::after {
+    content: none;
+  }
+}
+
+@keyframes theme-sheet-drop {
+  from {
+    clip-path: inset(0 0 0 0);
+  }
+  to {
+    clip-path: inset(100% 0 0 0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+@media print {
+  .reveal,
+  .reveal-scroll {
+    animation: none !important;
+  }
+}
+
+/* The design must be complete when perfectly still. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
+  }
+
+  .reveal,
+  .reveal-scroll,
+  .status-dot,
+  .caret {
+    animation: none !important;
+  }
+
+  .card-lift:hover {
+    transform: none;
+  }
+
+  /* Theme changes snap (hooks/useTheme.ts never creates the sheet); belt and braces. */
+  .theme-sheet {
+    display: none;
+  }
 }

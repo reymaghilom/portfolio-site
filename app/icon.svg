@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    rect { fill: #0a0a0a; }
+    path { fill: #ffffff; }
+    @media (prefers-color-scheme: dark) {
+      rect { fill: #f4f4f5; }
+      path { fill: #0c0c0f; }
+    }
+  </style>
+  <rect width="32" height="32" rx="8" />
+  <!-- Pixel-style "R" on a 2px grid -->
+  <path d="M10 8h10v2h2v6h-2v2h-2v2h2v2h2v2h-4v-2h-2v-2h-2v4h-4V8zm4 4v4h4v-4h-4z" />
+</svg>

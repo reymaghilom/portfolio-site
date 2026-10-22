@@ -23,11 +23,11 @@ My experience includes full-stack application development, REST API integration,
 ### [Credit Investigation Management System](https://github.com/reymaghilom/brbi-cims)
 A Laravel-based application developed in a banking work environment to manage client records, credit investigation activities, scheduling, and reports.
 
-**Live Site:** [[[http://pesowifi.duckdns.org](http://cis.kesug.com/)/](http://cis.kesug.com/)](http://cis.kesug.com/)
+**Live Site:** [(http://cis.kesug.com/)](http://cis.kesug.com/)]
 
 **Technologies:** Laravel, PHP, MySQL, JavaScript, Tailwind CSS
 
-### PisoWiFi Monitoring System
+###  [PisoWiFi Monitoring System](https://github.com/reymaghilom/pisowifi-monitoring)
 A full-stack web application developed for my personal PisoWiFi business to monitor machine connectivity, uptime, and monitoring history, with secure remote administration through a gateway. Remote access to the native WiFi5Soft dashboards allows me to view sales, CPU usage, and other operational information.
 
 **Live Site:** [http://pesowifi.duckdns.org/](http://pesowifi.duckdns.org/)

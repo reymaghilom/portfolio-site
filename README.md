@@ -32,6 +32,8 @@ A full-stack web application developed for my personal PisoWiFi business to moni
 
 **Live Site:** [http://pesowifi.duckdns.org/](http://pesowifi.duckdns.org/)
 
+**Technologies:** Next.js, Tailwind.css, Typescript, Fastify api, Supabase, n8n, Google Cloud VPS
+
 ### [Sari-sari Store Inventory & POS](https://github.com/reymaghilom/sari2x-store-pos-and-inventory)
 An offline-first mobile application created for my mother's sari-sari store, featuring inventory management, point-of-sale workflows, barcode scanning, customer credit tracking, and cloud synchronization.
 

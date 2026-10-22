@@ -23,7 +23,7 @@ My experience includes full-stack application development, REST API integration,
 ### [Credit Investigation Management System](https://github.com/reymaghilom/brbi-cims)
 A Laravel-based application developed in a banking work environment to manage client records, credit investigation activities, scheduling, and reports.
 
-**Live Site:** [[http://pesowifi.duckdns.org/](http://cis.kesug.com/)](http://cis.kesug.com/)
+**Live Site:** [[[http://pesowifi.duckdns.org](http://cis.kesug.com/)/](http://cis.kesug.com/)](http://cis.kesug.com/)
 
 **Technologies:** Laravel, PHP, MySQL, JavaScript, Tailwind CSS
 

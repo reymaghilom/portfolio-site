@@ -25,6 +25,13 @@ A Laravel-based application developed in a banking work environment to manage cl
 
 **Technologies:** Laravel, PHP, MySQL, JavaScript, Tailwind CSS
 
+### PisoWiFi Monitoring System
+A full-stack web application developed for my personal PisoWiFi business to monitor machine connectivity, uptime, and monitoring history, with secure remote administration through a gateway. Remote access to the native WiFi5Soft dashboards allows me to view sales, CPU usage, and other operational information.
+
+**Live Site:** [http://pesowifi.duckdns.org/](http://pesowifi.duckdns.org/)
+
+**Source Code:** [https://github.com/reymaghilom/pisowifi-monitoring](https://github.com/reymaghilom/pisowifi-monitoring)
+
 ### [Sari-sari Store Inventory & POS](https://github.com/reymaghilom/sari2x-store-pos-and-inventory)
 An offline-first mobile application created for my mother's sari-sari store, featuring inventory management, point-of-sale workflows, barcode scanning, customer credit tracking, and cloud synchronization.
 

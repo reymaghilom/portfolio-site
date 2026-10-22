@@ -135,6 +135,7 @@ export const skillGroups: SkillGroup[] = [
       { name: "MySQL", icon: "mysql" },
       { name: "Supabase", icon: "supabase" },
       { name: "MongoDB", icon: "mongodb" },
+      { name: "REST API", icon: "restapi" },
     ],
   },
   {
@@ -154,6 +155,8 @@ export const skillGroups: SkillGroup[] = [
       { name: "Visual Studio Code", icon: "visualstudiocode" },
       { name: "Vite", icon: "vite" },
       { name: "Cloudinary", icon: "cloudinary" },
+      { name: "n8n Automation", icon: "n8n" },
+      { name: "Google Cloud VPS", icon: "googlecloud" },
     ],
   },
   {

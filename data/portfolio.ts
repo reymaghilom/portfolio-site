@@ -35,6 +35,8 @@ export type Project = {
   live?: string;
   /** Real screenshots, main one first: it fronts the card; clicking it opens them all. */
   images?: ProjectImage[];
+  /** Optional disclosure shown on the card and inside the screenshot viewer. */
+  screenshotNote?: string;
 };
 
 export type Skill = {
@@ -65,11 +67,12 @@ export type DevelopmentEntry = {
   projects?: string[];
 };
 
-/** Journey, second group: employment history, kept as concise supporting context. */
+/** Journey, second group: latest employment only (a banking role, not IT), kept as context. */
 export type Employment = {
   organization: string;
-  /** Oldest first. */
   roles: { title: string; period: string }[];
+  /** Short note on how the roles got here, shown under them. */
+  summary?: string;
 };
 
 export type ContactLink = {
@@ -82,7 +85,7 @@ export type ContactLink = {
 
 export const profile = {
   name: "Rey C. Maghilom",
-  role: "ENTRY-LEVEL WEB AND MOBILE DEVELOPER",
+  role: "ENTRY-LEVEL FULL STACK WEB AND MOBILE DEVELOPER",
   intro:
     "Building modern, responsive digital experiences while continuously developing my skills in web and mobile technologies.",
   location: "Manticao, Misamis Oriental",
@@ -180,6 +183,7 @@ export const projects: Project[] = [
     year: "2026",
     context: "Internal system",
     live: "https://cis.kesug.com",
+    screenshotNote: "Screenshots use demo data and dummy accounts only.",
     images: [
       {
         src: "/images/credit-investigation/cims-1.png",
@@ -264,6 +268,83 @@ export const projects: Project[] = [
     technologies: ["Laravel", "Vanilla JavaScript", "Tailwind CSS", "MySQL", "Cloudinary", "Vite"],
   },
   {
+    title: "PisoWiFi Monitoring System",
+    context: "Personal business project",
+    live: "http://pesowifi.duckdns.org/",
+    images: [
+      {
+        src: "/images/pisowifi-monitoring/login-page.png",
+        label: "Login Page",
+        alt: "PisoWiFi Monitoring sign-in page with email and password fields.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        src: "/images/pisowifi-monitoring/dashboard.png",
+        label: "Dashboard",
+        alt: "PisoWiFi Monitoring dashboard showing registered machines, connectivity, measured uptime, and recent status changes.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        src: "/images/pisowifi-monitoring/my-pisowifi.png",
+        label: "My PisoWiFi",
+        alt: "My PisoWiFi page listing two machines, software, connection status, and last check times; private addresses are redacted.",
+        width: 1586,
+        height: 992,
+      },
+      {
+        src: "/images/pisowifi-monitoring/machine-details.png",
+        label: "Machine Details",
+        alt: "Machine Details page showing connectivity status, uptime, response time, outages, and machine actions; device identifiers are redacted.",
+        width: 1586,
+        height: 992,
+      },
+      {
+        src: "/images/pisowifi-monitoring/monitoring-history.png",
+        label: "Monitoring History",
+        alt: "Monitoring History page with machine status timelines, outage events, uptime, and average response time charts.",
+        width: 1440,
+        height: 900,
+      },
+      {
+        src: "/images/pisowifi-monitoring/remote-adminatration.png",
+        label: "Remote Administration",
+        alt: "Remote Administration page for choosing an online machine and opening its native administration dashboard through a secure gateway; private addresses are redacted.",
+        width: 1586,
+        height: 992,
+      },
+      {
+        src: "/images/pisowifi-monitoring/add-pisowifi-machine.png",
+        label: "Add Machine",
+        alt: "Add machine form with software, network, and administration path fields; infrastructure values are redacted.",
+        width: 1586,
+        height: 992,
+      },
+      {
+        src: "/images/pisowifi-monitoring/settings.png",
+        label: "Settings",
+        alt: "Settings profile page with account navigation and display name; the personal email address is redacted.",
+        width: 1586,
+        height: 992,
+      },
+    ],
+    description:
+      "A full-stack web application I developed for my personal PisoWiFi business to monitor the connectivity, uptime, and operational status of my WiFi5Soft machines. The system provides monitoring history, automated outage and recovery notifications, and secure remote administration through a gateway, allowing me to access each machine's native dashboard to check sales, CPU usage, and other operational information without physically visiting the machines.",
+    technologies: [
+      "Next.js",
+      "React",
+      "TypeScript",
+      "Node.js",
+      "Fastify",
+      "PostgreSQL",
+      "Supabase",
+      "ZeroTier",
+      "Google Cloud Compute Engine",
+      "n8n",
+    ],
+  },
+  {
     title: "Reminder Mobile App",
     year: "2026",
     context: "Personal project",
@@ -313,6 +394,86 @@ export const projects: Project[] = [
     ],
     description:
       "A mobile reminder application for managing vitamin and supplement schedules, reminders, and intake tracking, developed for personal use.",
+    technologies: ["React Native", "TypeScript", "Expo", "SQLite"],
+  },
+  {
+    title: "Expense Tracker Mobile App",
+    year: "2026",
+    context: "Personal project",
+    images: [
+      {
+        src: "/images/expense-tracker/expense-tracker-1.png",
+        label: "Analytics",
+        alt: "Expense Tracker Analytics screen, scrolled down: Expenses by Category with Food at 100%, and Income by Category with Salary at 100%.",
+        width: 576,
+        height: 1280,
+      },
+      {
+        src: "/images/expense-tracker/expense-tracker-2.png",
+        label: "Monthly Analytics",
+        alt: "Analytics screen for September 2026: ₱9,000.00 income, ₱1,000.00 expenses and an ₱8,000.00 balance, above Income vs Expense and Daily Spending charts.",
+        width: 576,
+        height: 1280,
+      },
+      {
+        src: "/images/expense-tracker/expense-tracker-3.png",
+        label: "Monthly Analytics",
+        alt: "Analytics screen for September 2026: ₱9,000.00 income, ₱1,000.00 expenses and an ₱8,000.00 balance, above Income vs Expense and Daily Spending charts.",
+        width: 576,
+        height: 1280,
+      },
+      {
+        src: "/images/expense-tracker/expense-tracker-4.png",
+        label: "Income vs Expense",
+        alt: "Analytics screen scrolled to the Income vs Expense bar chart, with the monthly totals above it and the Daily Spending chart below.",
+        width: 576,
+        height: 1280,
+      },
+      {
+        src: "/images/expense-tracker/expense-tracker-5.png",
+        label: "Transactions",
+        alt: "Transactions screen: type and period filters, and four transactions grouped by date, including a ₱9,000.00 salary and a ₱1,000.00 food expense.",
+        width: 576,
+        height: 1280,
+      },
+      {
+        src: "/images/expense-tracker/expense-tracker-6.png",
+        label: "Home",
+        alt: "Home screen scrolled down: the Income vs Expense chart and Recent Transactions, with today’s salary and food entries.",
+        width: 576,
+        height: 1280,
+      },
+      {
+        src: "/images/expense-tracker/expense-tracker-7.png",
+        label: "Home",
+        alt: "Income & Expense Tracker home screen for September 2026: an ₱8,000.00 monthly balance card with income and expense totals, above the Income vs Expense chart.",
+        width: 576,
+        height: 1280,
+      },
+      {
+        src: "/images/expense-tracker/expense-tracker-8.png",
+        label: "Settings",
+        alt: "Settings screen: appearance, language and date format preferences, then currency, category management, backup and restore, and CSV export.",
+        width: 576,
+        height: 1280,
+      },
+      {
+        src: "/images/expense-tracker/expense-tracker-9.png",
+        label: "Add Income",
+        alt: "Add Income form: amount, category, date, received via, an optional note and receipt, and a Save Income button.",
+        width: 576,
+        height: 1280,
+      },
+      {
+        src: "/images/expense-tracker/expense-tracker-10.png",
+        label: "Add Expense",
+        alt: "Add Expense form: amount, category, date, payment method, an optional note and receipt, and a Save Expense button.",
+        width: 576,
+        height: 1280,
+      },
+    ],
+    description:
+      "Developed a mobile expense tracking application to help manage and monitor household expenses and budgeting.",
     technologies: ["React Native", "TypeScript", "Expo", "SQLite"],
   },
   {
@@ -450,86 +611,6 @@ export const projects: Project[] = [
       "Developed a mobile inventory and point-of-sale application for my mother’s sari-sari store to support day-to-day store operations and improve product and sales management.",
     technologies: ["React Native", "TypeScript", "Expo", "SQLite"],
   },
-  {
-    title: "Expense Tracker Mobile App",
-    year: "2026",
-    context: "Personal project",
-    images: [
-      {
-        src: "/images/expense-tracker/expense-tracker-1.png",
-        label: "Analytics",
-        alt: "Expense Tracker Analytics screen, scrolled down: Expenses by Category with Food at 100%, and Income by Category with Salary at 100%.",
-        width: 576,
-        height: 1280,
-      },
-      {
-        src: "/images/expense-tracker/expense-tracker-2.png",
-        label: "Monthly Analytics",
-        alt: "Analytics screen for September 2026: ₱9,000.00 income, ₱1,000.00 expenses and an ₱8,000.00 balance, above Income vs Expense and Daily Spending charts.",
-        width: 576,
-        height: 1280,
-      },
-      {
-        src: "/images/expense-tracker/expense-tracker-3.png",
-        label: "Monthly Analytics",
-        alt: "Analytics screen for September 2026: ₱9,000.00 income, ₱1,000.00 expenses and an ₱8,000.00 balance, above Income vs Expense and Daily Spending charts.",
-        width: 576,
-        height: 1280,
-      },
-      {
-        src: "/images/expense-tracker/expense-tracker-4.png",
-        label: "Income vs Expense",
-        alt: "Analytics screen scrolled to the Income vs Expense bar chart, with the monthly totals above it and the Daily Spending chart below.",
-        width: 576,
-        height: 1280,
-      },
-      {
-        src: "/images/expense-tracker/expense-tracker-5.png",
-        label: "Transactions",
-        alt: "Transactions screen: type and period filters, and four transactions grouped by date, including a ₱9,000.00 salary and a ₱1,000.00 food expense.",
-        width: 576,
-        height: 1280,
-      },
-      {
-        src: "/images/expense-tracker/expense-tracker-6.png",
-        label: "Home",
-        alt: "Home screen scrolled down: the Income vs Expense chart and Recent Transactions, with today’s salary and food entries.",
-        width: 576,
-        height: 1280,
-      },
-      {
-        src: "/images/expense-tracker/expense-tracker-7.png",
-        label: "Home",
-        alt: "Income & Expense Tracker home screen for September 2026: an ₱8,000.00 monthly balance card with income and expense totals, above the Income vs Expense chart.",
-        width: 576,
-        height: 1280,
-      },
-      {
-        src: "/images/expense-tracker/expense-tracker-8.png",
-        label: "Settings",
-        alt: "Settings screen: appearance, language and date format preferences, then currency, category management, backup and restore, and CSV export.",
-        width: 576,
-        height: 1280,
-      },
-      {
-        src: "/images/expense-tracker/expense-tracker-9.png",
-        label: "Add Income",
-        alt: "Add Income form: amount, category, date, received via, an optional note and receipt, and a Save Income button.",
-        width: 576,
-        height: 1280,
-      },
-      {
-        src: "/images/expense-tracker/expense-tracker-10.png",
-        label: "Add Expense",
-        alt: "Add Expense form: amount, category, date, payment method, an optional note and receipt, and a Save Expense button.",
-        width: 576,
-        height: 1280,
-      },
-    ],
-    description:
-      "Developed a mobile expense tracking application to help manage and monitor household expenses and budgeting.",
-    technologies: ["React Native", "TypeScript", "Expo", "SQLite"],
-  },
 ];
 
 // Journey: development work leads; banking employment follows as background.
@@ -565,19 +646,14 @@ export const developmentWork: DevelopmentEntry[] = [
   },
 ];
 
-// Journey: professional background, oldest first.
+// Journey: latest banking employment only (ended 2026), with its progression in `summary`;
+// CARD SME Bank is on the resume, not the site.
 export const employment: Employment[] = [
   {
-    organization: "CARD SME Bank",
-    roles: [{ title: "Account Officer", period: "2015 – 2019" }],
-  },
-  {
     organization: "Binhi Rural Bank Inc.",
-    roles: [
-      { title: "Account Officer", period: "2019" },
-      { title: "Credit Investigator", period: "2019 – 2025" },
-      { title: "Senior Credit Investigator", period: "2025 – Present" },
-    ],
+    roles: [{ title: "Senior Credit Investigator", period: "2025 – 2026" }],
+    summary:
+      "Banking career at Binhi Rural Bank: started as an Account Officer in 2019, then worked as a Credit Investigator (mid 2019–2025) before advancing to Senior Credit Investigator in 2025.",
   },
 ];
 

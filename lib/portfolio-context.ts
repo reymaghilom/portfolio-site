@@ -40,7 +40,7 @@ function portfolioFacts(): string {
     `${education.degree}, ${education.period}`,
     ...education.majors,
     "",
-    "DEVELOPMENT EXPERIENCE",
+    "DEVELOPMENT EXPERIENCE (an internal project and independent personal work, not formal IT job titles)",
     ...developmentWork.flatMap((entry) => [
       `${entry.title} (${entry.period})${entry.kind ? ` · ${entry.kind}` : ""} · ${entry.context}`,
       entry.summary,
@@ -49,10 +49,11 @@ function portfolioFacts(): string {
       ...(entry.projects?.length ? ["Personal projects:", list(entry.projects)] : []),
       "",
     ]),
-    "PROFESSIONAL BACKGROUND (banking, before and alongside development)",
+    "BANKING EXPERIENCE (a banking position, not an IT role; it ended in 2026 and is not his current job)",
     ...employment.flatMap((job) => [
       job.organization,
       list(job.roles.map((role) => `${role.title} (${role.period})`)),
+      ...(job.summary ? [job.summary] : []),
     ]),
     "",
     "PROJECTS (as shown in the portfolio's Projects section)",

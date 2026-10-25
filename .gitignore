@@ -19,6 +19,7 @@
 
 # production
 /build
+/private/pisowifi-monitoring-originals/
 
 # misc
 .DS_Store

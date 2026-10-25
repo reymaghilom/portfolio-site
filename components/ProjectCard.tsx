@@ -119,7 +119,8 @@ function TechList({ items }: { items: string[] }) {
 }
 
 export default function ProjectCard({ project, featured = false }: ProjectCardProps) {
-  const { title, description, technologies, year, context, github, live, images } = project;
+  const { title, description, technologies, year, context, github, live, images, screenshotNote } =
+    project;
   const links = [
     live && { label: "Launch site", href: live },
     github && { label: "Source", href: github },
@@ -145,7 +146,7 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
         }
       >
         {images?.length ? (
-          <ScreenshotGallery title={title} images={images}>
+          <ScreenshotGallery title={title} images={images} note={screenshotNote}>
             <Media project={project} featured={featured} />
           </ScreenshotGallery>
         ) : (
@@ -170,6 +171,11 @@ export default function ProjectCard({ project, featured = false }: ProjectCardPr
           {title}
         </h3>
         <p className="mt-2 text-[13px] leading-relaxed text-gray-600">{description}</p>
+        {screenshotNote && (
+          <p className="micro-label mt-3 text-[9px] leading-relaxed text-gray-500">
+            {screenshotNote}
+          </p>
+        )}
 
         <div className={featured ? "mt-5" : "mt-auto pt-4"}>
           <TechList items={technologies} />

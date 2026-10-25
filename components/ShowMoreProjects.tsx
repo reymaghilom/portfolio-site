@@ -31,8 +31,8 @@ function useShowMore() {
 }
 
 /**
- * Shares the open/closed state between the "Show All" control (in the section's heading
- * row) and the folded-away projects further down.
+ * Shares the open/closed state between the "Show All" control (under the visible project
+ * cards) and the folded-away projects below it.
  */
 export function ShowMoreProvider({ count, children }: { count: number; children: ReactNode }) {
   const [open, setOpen] = useState(false);

@@ -16,6 +16,8 @@ import { CloseIcon } from "./icons";
 type ScreenshotGalleryProps = {
   title: string;
   images: ProjectImage[];
+  /** Optional disclosure about the contents shown in the screenshots. */
+  note?: string;
   className?: string;
   /** The card's media, rendered as the button that opens the viewer. */
   children: ReactNode;
@@ -62,6 +64,7 @@ function dotLayout(count: number) {
 export default function ScreenshotGallery({
   title,
   images,
+  note,
   className = "",
   children,
 }: ScreenshotGalleryProps) {
@@ -280,6 +283,7 @@ export default function ScreenshotGallery({
                 className="micro-label px-14 text-center text-[10px] leading-relaxed"
               >
                 <span className="block text-white/60">{title}</span>
+                {note && <span className="mt-1 block text-[9px] text-white/50">{note}</span>}
                 {many && (
                   <span className="mt-0.5 block text-white">
                     {index + 1} / {count}

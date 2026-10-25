@@ -1,4 +1,3 @@
-import type { ReactNode } from "react";
 import { projects } from "@/data/portfolio";
 import ProjectCard from "./ProjectCard";
 import RevealOnView from "./RevealOnView";
@@ -17,11 +16,11 @@ export default function Projects() {
   const shown = rest.slice(0, INITIAL - 1);
   const more = rest.slice(INITIAL - 1);
 
-  const section = (action?: ReactNode) => (
-    <Section id="projects" index={4} label="projects" title="Selected Projects" action={action}>
+  const section = (
+    <Section id="projects" index={4} label="projects" title="Selected Projects">
       {/* The lead project spans the column; the next ones follow in the grid, each fading up
           as it scrolls into view, staggered in reading order. Any further projects wait
-          behind "Show All" in the heading row. */}
+          behind "Show All", right-aligned under the last visible card, and open below it. */}
       <RevealOnView index={0}>
         <ProjectCard project={lead} featured />
       </RevealOnView>
@@ -33,22 +32,27 @@ export default function Projects() {
         ))}
       </div>
       {more.length > 0 && (
-        <ShowMoreRegion>
-          <div className={`pt-3 ${grid}`}>
-            {more.map((project) => (
-              <div key={project.title} className={cell}>
-                <ProjectCard project={project} />
-              </div>
-            ))}
+        <>
+          <div className="mt-1 flex justify-end">
+            <ShowMoreToggle />
           </div>
-        </ShowMoreRegion>
+          <ShowMoreRegion>
+            <div className={`pt-3 ${grid}`}>
+              {more.map((project) => (
+                <div key={project.title} className={cell}>
+                  <ProjectCard project={project} />
+                </div>
+              ))}
+            </div>
+          </ShowMoreRegion>
+        </>
       )}
     </Section>
   );
 
   return more.length > 0 ? (
-    <ShowMoreProvider count={more.length}>{section(<ShowMoreToggle />)}</ShowMoreProvider>
+    <ShowMoreProvider count={more.length}>{section}</ShowMoreProvider>
   ) : (
-    section()
+    section
   );
 }

@@ -8,7 +8,7 @@ type SectionProps = {
   label: string;
   /** Section heading ("Skills & Tools"). Omit when the content brings its own. */
   title?: string;
-  /** A control at the right of the heading's row (e.g. Projects' "Show All"). */
+  /** A control at the right of the heading's row. */
   action?: ReactNode;
   children: ReactNode;
 };

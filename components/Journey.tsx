@@ -113,9 +113,9 @@ export default function Journey() {
         ))}
       </ol>
 
-      {/* 02 — Employment as supporting context: no cards, smaller type, a light rail. */}
+      {/* 02 — Banking employment as supporting context: no cards, smaller type, a light rail. */}
       <div className="mt-16">
-        <GroupLabel index={2}>Professional background</GroupLabel>
+        <GroupLabel index={2}>Banking experience</GroupLabel>
         <ol className="grid gap-x-10 gap-y-6 sm:grid-cols-2">
           {employment.map((org) => (
             <li key={org.organization} className="border-l border-gray-200 pl-4">
@@ -133,6 +133,9 @@ export default function Journey() {
                   </li>
                 ))}
               </ul>
+              {org.summary && (
+                <p className="mt-3 text-[13px] leading-relaxed text-gray-500">{org.summary}</p>
+              )}
             </li>
           ))}
         </ol>

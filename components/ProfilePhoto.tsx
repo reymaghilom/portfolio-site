@@ -1,5 +1,5 @@
 import Image from "next/image";
-import photo from "@/public/images/profile-cutout.png";
+import photo from "@/public/images/profile-transparent.png";
 
 /**
  * Circular portrait for the identity blocks (sidebar, mobile bar, hero).
@@ -16,7 +16,7 @@ import photo from "@/public/images/profile-cutout.png";
 export default function ProfilePhoto({ size, className }: { size: number; className?: string }) {
   return (
     <span
-      className={`profile-photo-frame relative block shrink-0 overflow-hidden rounded-full bg-background ${className ?? ""}`}
+      className={`profile-photo-frame relative block shrink-0 overflow-hidden rounded-full border-0 bg-background ${className ?? ""}`}
       style={className ? undefined : { width: size, height: size }}
     >
       <Image
@@ -26,7 +26,7 @@ export default function ProfilePhoto({ size, className }: { size: number; classN
         height={size}
         sizes={`${size}px`}
         loading="eager"
-        className="size-full object-cover opacity-85 brightness-[.9] contrast-[.92] saturate-[.9] drop-shadow-sm"
+        className="size-full border-0 object-cover opacity-85 brightness-[.9] contrast-[.92] saturate-[.9] drop-shadow-sm"
       />
     </span>
   );

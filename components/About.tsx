@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { about, profile } from "@/data/portfolio";
 import { stagger } from "@/lib/stagger";
-import photo from "@/public/images/profile-cutout.webp";
+import photo from "@/public/images/profile-cutout.png";
 import { DownloadIcon } from "./icons";
 import RoleTypewriter from "./RoleTypewriter";
 
@@ -18,7 +18,7 @@ export default function About() {
         {/* Identity card. Phones: photo beside the details; md+: photo above them. */}
         <div className="reveal md:pt-9" style={stagger(0)}>
           <div className="flex items-center gap-4 md:block">
-            <div className="relative aspect-square w-24 shrink-0 overflow-hidden rounded-lg bg-background sm:w-28 md:w-full">
+            <div className="profile-photo-frame relative aspect-square w-24 shrink-0 overflow-hidden rounded-lg bg-background sm:w-28 md:w-full">
               <Image
                 src={photo}
                 alt=""

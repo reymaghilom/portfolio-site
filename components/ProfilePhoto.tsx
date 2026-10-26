@@ -1,15 +1,14 @@
 import Image from "next/image";
-import photo from "@/public/images/profile-cutout.webp";
+import photo from "@/public/images/profile-cutout.png";
 
 /**
  * Circular portrait for the identity blocks (sidebar, mobile bar, hero).
  * Always shown beside the visible name, so it is decorative to screen readers
  * (empty alt) — an alt of the name would just be read twice.
  *
- * The source is a transparent square half-body cutout; scaling it inside a clipped
- * circle, anchored near the face, gives a head-and-shoulders crop. The background
- * uses the local theme token so the animated old-theme sheet keeps its original
- * color until the wipe reaches the portrait.
+ * The square source is clipped to a circle for a compact head-and-shoulders crop.
+ * The background uses the local theme token so the animated old-theme sheet keeps
+ * its original color until the wipe reaches the portrait.
  *
  * `size` is the largest rendered size in px. Pass sizing classes in `className`
  * for a responsive photo; without them the photo is fixed at `size`.
@@ -17,7 +16,7 @@ import photo from "@/public/images/profile-cutout.webp";
 export default function ProfilePhoto({ size, className }: { size: number; className?: string }) {
   return (
     <span
-      className={`relative block shrink-0 overflow-hidden rounded-full bg-background ${className ?? ""}`}
+      className={`profile-photo-frame relative block shrink-0 overflow-hidden rounded-full bg-background ${className ?? ""}`}
       style={className ? undefined : { width: size, height: size }}
     >
       <Image
@@ -25,10 +24,9 @@ export default function ProfilePhoto({ size, className }: { size: number; classN
         alt=""
         width={size}
         height={size}
-        // Request enough pixels for the 1.5× zoom so the crop stays sharp.
-        sizes={`${Math.ceil(size * 1.5)}px`}
+        sizes={`${size}px`}
         loading="eager"
-        className="size-full origin-[50%_28%] scale-150 object-cover opacity-85 brightness-[.9] contrast-[.92] saturate-[.9] drop-shadow-sm"
+        className="size-full object-cover opacity-85 brightness-[.9] contrast-[.92] saturate-[.9] drop-shadow-sm"
       />
     </span>
   );

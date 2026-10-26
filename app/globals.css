@@ -278,6 +278,13 @@
     animation: pulse-dot 1.8s ease-in-out infinite;
   }
 
+  /* The portrait cutout lets the theme fill show through. During a theme change,
+     the old-theme sheet keeps its original fill until the wipe passes; the live
+     frame settles underneath it. */
+  .profile-photo-frame {
+    transition: background-color 450ms var(--ease-soft);
+  }
+
   /* Typewriter caret: a slow, soft blink while the line is at rest. */
   .caret {
     animation: caret-blink 1.1s ease-in-out infinite;

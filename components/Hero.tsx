@@ -63,7 +63,7 @@ export default function Hero() {
         </a>
         <a
           href={profile.resume}
-          download="rey.docx"
+          download="resume.docx"
           className="group inline-flex items-center gap-2 rounded-lg border border-gray-300 px-3.5 py-[9px] font-mono text-xs uppercase tracking-widest text-gray-700 transition-colors duration-250 ease-soft hover:border-gray-400 hover:bg-gray-50 hover:text-ink"
         >
           Download Resume

@@ -85,13 +85,13 @@ export type ContactLink = {
 
 export const profile = {
   name: "Rey C. Maghilom",
-  role: "ENTRY-LEVEL FULL STACK WEB AND MOBILE DEVELOPER",
+  role: "ENTRY-LEVEL FULL STACK WEB DEVELOPER AND AI AUTOMATION SPECIALIST",
   intro:
     "Building modern, responsive digital experiences while continuously developing my skills in web and mobile technologies.",
   location: "Manticao, Misamis Oriental",
   status: "Open to Web and Mobile App Development Opportunities",
-  // The hero's "Download Resume" downloads this Word file (public/rey.docx).
-  resume: "/rey.docx",
+  // The hero's "Download Resume" downloads this Word file (public/resume.docx).
+  resume: "/resume.docx",
 };
 
 export const navItems: NavItem[] = [
@@ -634,7 +634,7 @@ export const developmentWork: DevelopmentEntry[] = [
   },
   {
     title: "Independent Web & Mobile Development",
-    period: "Mid-2025 – Present",
+    period: "2025 – 2026",
     context: "Independent work",
     summary:
       "Started building personal projects during my free time to gain practical, hands-on software development experience.",
@@ -646,14 +646,15 @@ export const developmentWork: DevelopmentEntry[] = [
   },
 ];
 
-// Journey: latest banking employment only (ended 2026), with its progression in `summary`;
-// CARD SME Bank is on the resume, not the site.
+// Journey: banking employment, latest first.
 export const employment: Employment[] = [
   {
     organization: "Binhi Rural Bank Inc.",
-    roles: [{ title: "Senior Credit Investigator", period: "2025 – 2026" }],
-    summary:
-      "Banking career at Binhi Rural Bank: started as an Account Officer in 2019, then worked as a Credit Investigator (mid 2019–2025) before advancing to Senior Credit Investigator in 2025.",
+    roles: [{ title: "Account Officer/Credit Investigator", period: "2019 – 2026" }],
+  },
+  {
+    organization: "CARD SME Bank Inc.",
+    roles: [{ title: "Account Officer/Credit Investigator", period: "2015 – 2019" }],
   },
 ];
 
@@ -673,8 +674,8 @@ export const contactLinks: ContactLink[] = [
   },
   {
     label: "LinkedIn",
-    value: "linkedin.com/in/rey-cahansa-13a37426b",
-    href: "https://www.linkedin.com/in/rey-cahansa-13a37426b",
+    value: "linkedin.com/in/reymaghilom",
+    href: "https://www.linkedin.com/in/reymaghilom",
     external: true,
   },
   {

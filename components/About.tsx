@@ -93,7 +93,7 @@ export default function About() {
             </a>
             <a
               href={profile.resume}
-              download="rey.docx"
+              download="resume.docx"
               className="group inline-flex items-center gap-2 rounded-md border border-gray-300 bg-background px-4 py-[9px] font-mono text-[11px] font-medium uppercase tracking-widest text-gray-700 transition-colors duration-200 hover:border-gray-400 hover:text-ink"
             >
               Download Resume

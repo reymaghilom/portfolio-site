@@ -89,7 +89,7 @@ export const profile = {
   intro:
     "Building modern, responsive digital experiences while continuously developing my skills in web and mobile technologies.",
   location: "Manticao, Misamis Oriental",
-  status: "Open to Web and Mobile App Development Opportunities",
+  status: "Open to Web Development and AI Automation Opportunities",
   // The hero's "Download Resume" downloads this Word file (public/resume.docx).
   resume: "/resume.docx",
 };
@@ -104,8 +104,9 @@ export const navItems: NavItem[] = [
 ];
 
 export const about: string[] = [
-  "I’m Rey, an entry-level web and mobile developer who builds clean, responsive applications and turns ideas into practical solutions for real-world and client needs.",
-  "I develop web and mobile applications focused on clean, responsive user experiences, leveraging AI-assisted tools across the software development lifecycle—from planning and implementation to debugging and refinement.",
+  "I’m Rey, an entry-level full stack developer and AI automation specialist who builds web and mobile applications and turns ideas into practical solutions for real-world and client needs.",
+  "On the automation side, I design workflows with n8n and AI tools that take repetitive work off people’s hands, such as monitoring systems, sending alerts, and connecting apps so data moves without manual effort.",
+  "I also use AI-assisted tools across the whole development process, from planning and implementation to debugging and refinement, so I can ship clean, responsive applications faster.",
 ];
 
 // Compact education block under the About text; work history lives in Journey.

@@ -85,11 +85,10 @@ export type ContactLink = {
 
 export const profile = {
   name: "Rey C. Maghilom",
-  role: "Entry-Level Full Stack Web Developer and AI Automation Specialist",
-  intro:
-    "Building modern, responsive digital experiences while continuously developing my skills in web and mobile technologies.",
+  role: "Full-Stack Developer & AI Automation",
+  intro: "Building practical business applications.",
   location: "Manticao, Misamis Oriental",
-  status: "Open to Web Development and AI Automation Opportunities",
+  status: "Open to entry-level, part-time, and remote opportunities.",
   // The hero's "Download Resume" downloads this Word file (public/resume.docx).
   resume: "/resume.docx",
 };
@@ -104,9 +103,9 @@ export const navItems: NavItem[] = [
 ];
 
 export const about: string[] = [
-  "I’m Rey, an entry-level full stack developer and AI automation specialist who builds web and mobile applications and turns ideas into practical solutions for real-world and client needs.",
-  "On the automation side, I design workflows with n8n and AI tools that take repetitive work off people’s hands, such as monitoring systems, sending alerts, and connecting apps so data moves without manual effort.",
-  "I also use AI-assisted tools across the whole development process, from planning and implementation to debugging and refinement, so I can ship clean, responsive applications faster.",
+  "I’m Rey, an entry-level Full-Stack Developer and AI Automation Specialist who builds practical web and mobile applications.",
+  "I also create n8n workflows that automate repetitive tasks, monitoring, alerts, and system integrations.",
+  "I’m open to entry-level, part-time, and remote opportunities in full-stack development and workflow automation.",
 ];
 
 // Compact education block under the About text; work history lives in Journey.

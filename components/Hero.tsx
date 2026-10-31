@@ -36,18 +36,23 @@ export default function Hero() {
           className="reveal mt-5 font-mono text-xs uppercase tracking-[0.2em] text-gray-500"
           style={stagger(2)}
         />
+
+        <p
+          className="reveal mt-4 max-w-md text-base leading-relaxed text-gray-600"
+          style={stagger(3)}
+        >
+          {profile.intro}
+        </p>
       </div>
 
-      <p
-        className="reveal mt-8 max-w-md sm:col-start-2 text-base leading-relaxed text-gray-600"
-        style={stagger(3)}
-      >
-        {profile.intro}
-      </p>
+      <div className="reveal mt-8 space-y-1 sm:col-start-2" style={stagger(4)}>
+        <p className="text-sm text-gray-600">{profile.status}</p>
+        <p className="font-mono text-xs text-gray-500">{profile.location}</p>
+      </div>
 
       <div
         className="reveal mt-10 flex flex-wrap items-center gap-3 sm:col-start-2"
-        style={stagger(4)}
+        style={stagger(5)}
       >
         <a
           href="#projects"

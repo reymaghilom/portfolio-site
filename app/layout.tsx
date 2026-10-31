@@ -29,12 +29,12 @@ const sourceSerif = Source_Serif_4({
 });
 
 export const metadata: Metadata = {
-  title: "Rey C. Maghilom — Entry-Level Web and Mobile Developer",
+  title: "Rey C. Maghilom — Entry-Level Full Stack Web Developer and AI Automation Specialist",
   description:
     "Portfolio of Rey C. Maghilom, an entry-level web developer and BS Information Technology graduate building responsive web and mobile applications.",
   authors: [{ name: "Rey C. Maghilom" }],
   openGraph: {
-    title: "Rey C. Maghilom — Entry-Level Web and Mobile Developer",
+    title: "Rey C. Maghilom — Entry-Level Full Stack Web Developer and AI Automation Specialist",
     description:
       "Building modern, responsive digital experiences while continuously developing my skills in web and mobile technologies.",
     type: "website",

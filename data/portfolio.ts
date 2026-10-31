@@ -85,7 +85,7 @@ export type ContactLink = {
 
 export const profile = {
   name: "Rey C. Maghilom",
-  role: "ENTRY-LEVEL FULL STACK WEB DEVELOPER AND AI AUTOMATION SPECIALIST",
+  role: "Entry-Level Full Stack Web Developer and AI Automation Specialist",
   intro:
     "Building modern, responsive digital experiences while continuously developing my skills in web and mobile technologies.",
   location: "Manticao, Misamis Oriental",
